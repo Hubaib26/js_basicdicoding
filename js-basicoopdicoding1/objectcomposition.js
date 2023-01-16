@@ -17,7 +17,7 @@ dan men-deploy aplikasi.
 Jika kita gambarkan skenario di atas dalam konsep OOP, Developer merupakan sebuah superclass; sedangkan 
 Front-End Developer, Back-End Developer, dan DevOps adalah subclass. Struktur dari pewarisan class akan 
 tampak seperti kode di bawah ini. */
-class Developer {
+/* class Developer {
   constructor(name) {
     this.name = name;
   }
@@ -43,11 +43,11 @@ class DevOps extends Developer {
   deployApp() {
     console.log(`${this.name} is deploying app...`);
   }
-}
+} */
 /* Seluruh class sudah terdefinisikan dengan baik, tetapi kurang Full-Stack Developer. 
   Apakah Anda punya ide cara mendefinisikan class FullStackDeveloper yang efektif tanpa ada 
   kode repetitif menggunakan pewarisan? */
-class FullStackDeveloper extends Developer {
+/* class FullStackDeveloper extends Developer {
   buildUI() {
     console.log(`${this.name} is building UI...`);
   }
@@ -59,7 +59,7 @@ class FullStackDeveloper extends Developer {
   deployApp() {
     console.log(`${this.name} is deploying app...`);
   }
-}
+} */
 /* Cara ini sungguh tidak efektif karena jika terjadi perubahan pada salah satu fungsi, kita perlu 
    mengubahnya di dua tempat.
 
@@ -70,6 +70,24 @@ kode di atas, pewarisan mendorong kita untuk menstrukturkan kode dengan pendekat
 class, yakni Front-End Developer, Back-End Developer, DevOps, dan Full-Stack Developer. Sedangkan object 
 composition, dia tidak memperdulikan peran, melainkan kode distrukturkan berdasarkan kemampuan yang dapat 
 dilakukan, seperti buildUI(), buildAPI(), dan deployApp(). */
+/* class Developer {
+  constructor(name) {
+    this.name = name;
+  }
+
+  commitChanges() {
+    console.log(`${this.name} is committing changes...`);
+  }
+}
+
+function canBuildUI(developer) {
+  return {
+    buildUI: () => {
+      console.log(`${developer.name} is building UI...`);
+    },
+  };
+}
+
 function canBuildAPI(developer) {
   return {
     buildAPI: () => {
@@ -84,7 +102,7 @@ function canDeployApp(developer) {
       console.log(`${developer.name} is deploying app...`);
     },
   };
-}
+} */
 
 /* Dengan memecah kode berdasarkan kemampuan, ke depannya kita akan lebih mudah dalam membuat 
   objek dengan peran apa pun, mau Front-End Developer, Back-End Developer, DevOps, Full-Stack, 
@@ -95,7 +113,7 @@ Agar lebih mudah dalam membuat objek, kita bisa membuat sebuah fungsi sebagai ob
 mengomposisikan kemampuan-kemampuan yang dibutuhkan. Di JavaScript, kita bisa secara mudah mengomposisikan 
 objek dengan menggunakan method Object.assign(). */
 
-function createFrontEndDeveloper(name) {
+/* function createFrontEndDeveloper(name) {
   const developer = new Developer(name);
   return Object.assign(developer, canBuildUI(developer));
 }
@@ -118,7 +136,7 @@ function createFullStackDeveloper(name) {
     canBuildAPI(developer),
     canDeployApp(developer)
   );
-}
+} */
 /* Setelah membuat fungsi object creator, kita bisa secara mudah membuat objek Front-End Developer, 
 Back-End Developer, DevOps, dan Full-Stack Developer.
 
